@@ -1,4 +1,4 @@
-# letterboxd-count-by-director
+# letterboxd-count-by-director (corrected)
 
 A small utility script that, given an exported [Letterboxd](http://letterboxd.com) user data file, outputs a text file with directors grouped by the count of films directed by them that the user has watched:
 
