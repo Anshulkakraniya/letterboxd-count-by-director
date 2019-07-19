@@ -13,7 +13,7 @@ import itertools
 
 CACHE_FILENAME = "cache.csv"
 OUT_FILENAME = "output.txt"
-REQUEST_DELAY_SECONDS = 0.5
+REQUEST_DELAY_SECONDS = 0.0
 
 
 def fetch_director(slug):
@@ -72,22 +72,23 @@ def process_watched_data(reader, cache):
 
 
 def read_cache(reader):
-    cache = {}
+	cache = {}
 
-    for entry in reader:
-        slug = entry[0]
-        director = entry[1]
-        cache[slug] = director
+	for entry in reader:
+		if entry:
+			slug = entry[0]
+			director = entry[1]
+			cache[slug] = director
 
-    print("Read {} entries from cache file: '{}'".format(len(cache), CACHE_FILENAME))
+		print("Read {} entries from cache file: '{}'".format(len(cache), CACHE_FILENAME))
 
-    return cache
+	return cache
 
 
 def write_cache(cache, cache_additions):
     cache = {**cache, **cache_additions}
 
-    with open(CACHE_FILENAME, "w") as cache_file:
+    with open(CACHE_FILENAME, "w", encoding="utf-8") as cache_file:
         cache_writer = csv.writer(cache_file)
         for slug, director in cache.items():
             cache_writer.writerow([slug, director])
@@ -108,7 +109,7 @@ def write_output(film_counts):
 
     grouped_film_counts = itertools.groupby(sorted_film_counts, get_count)
 
-    with open(OUT_FILENAME, "w") as output_file:
+    with open(OUT_FILENAME, "w", encoding="utf-8") as output_file:
         for count, group in grouped_film_counts:
             sort_key = lambda director_w_count: get_last_initial(get_director(director_w_count))
             group = sorted(list(group), key=sort_key)
@@ -138,7 +139,7 @@ def process(data_filename):
             cache = {}
 
             if os.path.isfile(CACHE_FILENAME):
-                with open(CACHE_FILENAME) as cache_file:
+                with open(CACHE_FILENAME, encoding='utf-8') as cache_file:
                     cache_reader = csv.reader(cache_file)
                     cache = read_cache(cache_reader)
             else:
