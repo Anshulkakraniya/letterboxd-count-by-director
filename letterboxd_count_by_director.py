@@ -19,7 +19,8 @@ REQUEST_DELAY_SECONDS = 0.0
 def fetch_director(slug):
     print("Fetching director for '{}'... ".format(slug), end="")
 
-    url = "https://letterboxd.com/film/{}/".format(slug)
+    url = slug
+    # url = "https://letterboxd.com/film/{}/".format(slug)
     content = urllib.request.urlopen(url).read().decode('utf-8')
 
     match = re.search(r"twitter:data1\" content=\"(.*)\"", content)
@@ -38,9 +39,10 @@ def get_slugs(reader):
 
     for entry in reader:
         url = entry[3]
+        # print(url)
         if url:
-            slug = url.split("/")[4]
-            slugs.append(slug)
+            # slug = url.split("/")[4]
+            slugs.append(url)
 
     return slugs
 
