@@ -1,4 +1,4 @@
-# letterboxd-count-by-director (corrected)
+# Letterboxd - Count films by director (updated)
 
 A small utility script that, given an exported [Letterboxd](http://letterboxd.com) user data file, outputs a text file with directors grouped by the count of films directed by them that the user has watched:
 
@@ -18,8 +18,6 @@ Sion Sono
 ```
 
 The script gets the director(s) of a film by scraping its Letterboxd page. It stores (film, director) pairs in a cache file (``cache.csv`` by default) to avoid unnecessary requests.
-
-Tested with Python 3.6.1 on Arch GNU/Linux.
 
 ## Usage
 1. Export your user data from [Letterboxd settings page](https://letterboxd.com/settings/data/).
